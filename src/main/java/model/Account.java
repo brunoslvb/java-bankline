@@ -1,6 +1,11 @@
 package model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Account {
+	@Id
 	private Integer number;
 	private Double balance;
 	
@@ -10,6 +15,7 @@ public class Account {
 	public void setNumber(Integer number) {
 		this.number = number;
 	}
+	
 	public Double getBalance() {
 		return balance;
 	}
