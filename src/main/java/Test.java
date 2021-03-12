@@ -22,18 +22,21 @@ public class Test {
 		User user = new User();
 		
 		user.setName("Bruno da Silva Barros 2");
-		user.setCpf(1234567890);
+		user.setCpf("12345678900");
 		user.setLogin("bruno");
 		user.setPassword("123456");
+		
+		// userRepository.save(user);
 		
 		User user2 = new User();
 		
 		user2.setName("Gabriel");
-		user2.setCpf(55555555);
+		user2.setCpf("55555555555");
 		user2.setLogin("gabriel");
 		user2.setPassword("66666");
 		
 		// userRepository.save(user2);
+		
 		// userRepository.update(user);
 		// userRepository.delete(user.getLogin());
 		
@@ -49,17 +52,17 @@ public class Test {
 		
 		Account account = new Account();
 		
-		account.setBalance(200.00);
-		account.setNumber(12369);
+		// account.setNumber(00001);
+		account.setUser(user);
 		
-		// accountRepository.save(account);
+		accountRepository.save(account);
 		
 		Account account2 = new Account();
 		
-		account2.setBalance(185.60);
-		account2.setNumber(55555);
+		// account2.setNumber(00002);
+		account2.setUser(user2);
 		
-		// accountRepository.save(account2);
+		accountRepository.save(account2);
 		
 		/*Account accountFound = accountRepository.find(account.getNumber());
 		
@@ -84,13 +87,11 @@ public class Test {
 		}*/
 		
 		
-		TransactionsRepository transactionsRepository = new TransactionsRepository();
+		/*TransactionsRepository transactionsRepository = new TransactionsRepository();
 		
 		Transactions transactions = new Transactions();
 		
-		transactions.setId(1);
-		transactions.setAccount(account);
-		transactions.setUser(user);
+		transactions.setOriginAccount(account);
 		transactions.setDate(new Date());
 		transactions.setDetail("Despesa teste");
 		transactions.setAmount(123.25);
@@ -100,17 +101,15 @@ public class Test {
 		
 		Transactions transactions2 = new Transactions();
 		
-		transactions2.setId(2);
-		transactions2.setAccount(account2);
-		transactions2.setUser(user2);
+		transactions2.setOriginAccount(account2);
 		transactions2.setDate(new Date());
 		transactions2.setDetail("Salário Accenture");
 		transactions2.setAmount(2500.00);
-		transactions2.setType(PlanAccount.REVENUE);
+		transactions2.setType(PlanAccount.REVENUE);*/
 		
 		// transactionsRepository.save(transactions2);
 		
-		Transactions transactionFound = transactionsRepository.find(transactions.getId());
+		/*Transactions transactionFound = transactionsRepository.find(transactions.getId());
 		
 		System.out.println("Usuário encontrado: " + transactionFound.getAccount() + " - " + transactionFound.getAmount());
 		
@@ -130,7 +129,7 @@ public class Test {
 		
 		for(Transactions transactionFor : transactionsTeste) {
 			System.out.println(transactionFor.getAccount().getNumber());
-		}
+		}*/
 		
 	}
 	

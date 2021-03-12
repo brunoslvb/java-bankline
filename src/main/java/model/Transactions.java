@@ -10,32 +10,24 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-@Entity
+// @Entity
 public class Transactions {
 	
-	@Id
+	/*@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Integer id;*/
 	
-	@ManyToOne
-	@JoinColumn(name = "id_user",foreignKey = @ForeignKey(name = "fk_user"))
-	User user;
-	
+	@Id
 	@ManyToOne
 	@JoinColumn(name = "id_account",foreignKey = @ForeignKey(name = "fk_account"))
-	Account account;
-	Date date;
-	PlanAccount type;
-	Double amount;
-	String detail;
+	private Account originAccount;
+	private Account destinyAccount;
+	private Date date;
+	private PlanAccount type;
+	private Double amount;
+	private String detail;
 	
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	
+
 	public Date getDate() {
 		return date;
 	}
@@ -64,19 +56,21 @@ public class Transactions {
 		this.detail = detail;
 	}
 	
-	public User getUser() {
-		return user;
+	public Account getOriginAccount() {
+		return originAccount;
 	}
-	public void setUser(User user) {
-		this.user = user;
+	public void setOriginAccount(Account originAccount) {
+		this.originAccount = originAccount;
 	}
 	
-	public Account getAccount() {
-		return account;
+	public Account getDestinyAccount() {
+		return destinyAccount;
 	}
-	public void setAccount(Account account) {
-		this.account = account;
+	public void setDestinyAccount(Account destinyAccount) {
+		this.destinyAccount = destinyAccount;
 	}
+	
+	
 }
 
 

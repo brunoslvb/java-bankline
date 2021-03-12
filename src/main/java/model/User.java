@@ -5,10 +5,11 @@ import javax.persistence.Id;
 
 @Entity
 public class User {
-	@Id
+	
 	private String login;
 	private String name;
-	private Integer cpf;
+	@Id
+	private String cpf;
 	private String password;
 	
 	public String getName() {
@@ -18,10 +19,10 @@ public class User {
 		this.name = name;
 	}
 	
-	public Integer getCpf() {
+	public String getCpf() {
 		return cpf;
 	}
-	public void setCpf(Integer cpf) {
+	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
 	
