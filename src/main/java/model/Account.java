@@ -2,9 +2,14 @@ package model;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -17,6 +22,9 @@ public class Account {
 	private User user;
 	
 	private Double balance = 0.0;
+	
+	@Enumerated(EnumType.STRING)
+	private StatusAccount status = StatusAccount.ENABLE;
 	
 	public Integer getNumber() {
 		return number;
@@ -38,4 +46,12 @@ public class Account {
 	public void setBalance(Double balance) {
 		this.balance = balance;
 	}
+	
+	public StatusAccount getStatus() {
+		return status;
+	}
+	public void setStatus(StatusAccount status) {
+		this.status = status;
+	}
+	
 }

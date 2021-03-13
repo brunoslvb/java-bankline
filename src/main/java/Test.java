@@ -5,64 +5,85 @@ import java.util.List;
 
 import org.hibernate.exception.ConstraintViolationException;
 
+import controller.TransactionController;
+import controller.UserController;
 import model.Account;
 import model.PlanAccount;
-import model.Transactions;
+import model.Transaction;
 import model.User;
 import repository.AccountRepository;
 import repository.TransactionsRepository;
 import repository.UserRepository;
+import service.UserService;
+import utils.Validators;
 
 public class Test {
 
 	public static void main(String[] args) {
+
+		UserController userController = new UserController();
 		
-		UserRepository userRepository = new UserRepository();
+		TransactionController transactionController = new TransactionController();
+				
+		User userDisable = new User();
+		
+		userDisable.setName("Teste da Silva");
+		userDisable.setCpf("22222222222");
+		userDisable.setLogin("teste");
+		userDisable.setPassword("020202");	
+		
+		User userEnable = new User();
+		
+		userEnable.setName("Teste 2");
+		userEnable.setCpf("33333333333");
+		userEnable.setLogin("teste2");
+		userEnable.setPassword("030303");
 		
 		User user = new User();
 		
-		user.setName("Bruno da Silva Barros 2");
-		user.setCpf("12345678900");
+		user.setName("Bruno");
+		user.setCpf("44444444444");
 		user.setLogin("bruno");
-		user.setPassword("123456");
+		user.setPassword("040404");
 		
-		// userRepository.save(user);
+		// userController.save(user);
 		
-		User user2 = new User();
+		// controller.delete(user);
 		
-		user2.setName("Gabriel");
-		user2.setCpf("55555555555");
-		user2.setLogin("gabriel");
-		user2.setPassword("66666");
+		// User userFound = controller.find(user.getCpf());
 		
-		// userRepository.save(user2);
+		/* System.out.println("Usuário encontrado: " + userFound.getName());
 		
-		// userRepository.update(user);
-		// userRepository.delete(user.getLogin());
+		List<User> users = controller.listAll();
 		
-		// User userFound = userRepository.find("vitor");
-		
-		// List<User> users = userRepository.list();
-		
-		/*for(User user2 : users) {
+		for(User user2 : users) {
 			System.out.println(user2.getName());
-		}*/
+		}
 		
 		AccountRepository accountRepository = new AccountRepository();
-		
+		*/
 		Account account = new Account();
 		
 		account.setNumber(1);
-		account.setUser(user);
-		
-		// accountRepository.save(account);
+		account.setUser(userDisable);
 		
 		Account account2 = new Account();
 		
 		account2.setNumber(2);
-		account2.setUser(user2);
+		account2.setUser(userEnable);
 		
-		// accountRepository.save(account2);
+		Account account3 = new Account();
+		
+		account3.setNumber(3);
+		account3.setUser(user);
+		
+		// Account userFound = accountRepository.findByCpf(user);
+		
+		// System.out.println("Usuário encontrado: " + userFound.getNumber());
+		
+		// accountRepository.delete(account);
+		
+		// accountRepository.save(account);
 		
 		/*Account accountFound = accountRepository.find(account.getNumber());
 		
@@ -89,26 +110,30 @@ public class Test {
 		
 		TransactionsRepository transactionsRepository = new TransactionsRepository();
 		
-		Transactions transactions = new Transactions();
+		Transaction transaction = new Transaction();
 		
-		transactions.setOriginAccount(account);
-		transactions.setDate(new Date());
-		transactions.setDetail("Despesa teste 3");
-		transactions.setAmount(123.25);
-		transactions.setType(PlanAccount.CHARGE);
+		transaction.setOriginAccount(account2);
+		transaction.setDate(new Date());
+		transaction.setDetail("Empréstimo para pagar o teclado");
+		transaction.setAmount(5.00);
+		transaction.setType(PlanAccount.REVENUE);
 		
-		transactionsRepository.save(transactions);
+		transactionController.save(transaction);
 		
-		Transactions transactions2 = new Transactions();
+		// transactionsRepository.save(transactions);
+		
+		Transaction transactions2 = new Transaction();
 		
 		transactions2.setOriginAccount(account2);
-		transactions2.setDestinyAccount(account);
+		transactions2.setDestinyAccount(account3);
 		transactions2.setDate(new Date());
-		transactions2.setDetail("Uber");
-		transactions2.setAmount(78.00);
+		transactions2.setDetail("Teclado");
+		transactions2.setAmount(50.00);
 		transactions2.setType(PlanAccount.TRANSFER);
 		
-		transactionsRepository.save(transactions2);
+		transactionController.save(transactions2);
+		
+		// transactionsRepository.save(transactions2);
 		
 		/*Transactions transactionFound = transactionsRepository.find(transactions.getId());
 		

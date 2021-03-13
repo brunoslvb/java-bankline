@@ -2,7 +2,15 @@ package model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.validation.constraints.Size;
+
+import org.hibernate.annotations.NotFound;
 
 @Entity
 public class User {
@@ -18,6 +26,9 @@ public class User {
 	
 	@Column(nullable = false)
 	private String password;
+	
+	@Enumerated(EnumType.STRING)
+	private StatusAccount status = StatusAccount.ENABLE;
 	
 	public String getName() {
 		return name;
@@ -45,6 +56,13 @@ public class User {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public StatusAccount getStatus() {
+		return status;
+	}
+	public void setStatus(StatusAccount status) {
+		this.status = status;
 	}
 	
 

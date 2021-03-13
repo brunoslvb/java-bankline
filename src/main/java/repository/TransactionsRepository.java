@@ -1,7 +1,7 @@
 package repository;
 
-import model.Transactions;
+import model.Transaction;
 
-public class TransactionsRepository extends AbstractRepository<Transactions> implements Repository<Transactions> {
+public class TransactionsRepository extends AbstractRepository<Transaction> implements Repository<Transaction> {
 
 }

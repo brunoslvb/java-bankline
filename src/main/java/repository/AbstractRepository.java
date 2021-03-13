@@ -12,7 +12,7 @@ public class AbstractRepository <E> {
 	
 	protected EntityManager em;
 	
-	private Class<E> entityClass;
+	protected Class<E> entityClass;
 	
 	public AbstractRepository() {
 		em = Database.connection("BankLineDB");
@@ -62,5 +62,4 @@ public class AbstractRepository <E> {
 		
 	}
 	
-
 }
