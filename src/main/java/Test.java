@@ -52,17 +52,17 @@ public class Test {
 		
 		Account account = new Account();
 		
-		// account.setNumber(00001);
+		account.setNumber(1);
 		account.setUser(user);
 		
-		accountRepository.save(account);
+		// accountRepository.save(account);
 		
 		Account account2 = new Account();
 		
-		// account2.setNumber(00002);
+		account2.setNumber(2);
 		account2.setUser(user2);
 		
-		accountRepository.save(account2);
+		// accountRepository.save(account2);
 		
 		/*Account accountFound = accountRepository.find(account.getNumber());
 		
@@ -87,27 +87,28 @@ public class Test {
 		}*/
 		
 		
-		/*TransactionsRepository transactionsRepository = new TransactionsRepository();
+		TransactionsRepository transactionsRepository = new TransactionsRepository();
 		
 		Transactions transactions = new Transactions();
 		
 		transactions.setOriginAccount(account);
 		transactions.setDate(new Date());
-		transactions.setDetail("Despesa teste");
+		transactions.setDetail("Despesa teste 3");
 		transactions.setAmount(123.25);
-		transactions.setType(PlanAccount.CHARGES);
+		transactions.setType(PlanAccount.CHARGE);
 		
-		// transactionsRepository.save(transactions);
+		transactionsRepository.save(transactions);
 		
 		Transactions transactions2 = new Transactions();
 		
 		transactions2.setOriginAccount(account2);
+		transactions2.setDestinyAccount(account);
 		transactions2.setDate(new Date());
-		transactions2.setDetail("Salário Accenture");
-		transactions2.setAmount(2500.00);
-		transactions2.setType(PlanAccount.REVENUE);*/
+		transactions2.setDetail("Uber");
+		transactions2.setAmount(78.00);
+		transactions2.setType(PlanAccount.TRANSFER);
 		
-		// transactionsRepository.save(transactions2);
+		transactionsRepository.save(transactions2);
 		
 		/*Transactions transactionFound = transactionsRepository.find(transactions.getId());
 		

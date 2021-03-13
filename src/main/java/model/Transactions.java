@@ -3,27 +3,30 @@ package model;
 import java.util.Date;
 
 import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-// @Entity
+@Entity
 public class Transactions {
 	
-	/*@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;*/
-	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+	
 	@ManyToOne
-	@JoinColumn(name = "id_account",foreignKey = @ForeignKey(name = "fk_account"))
 	private Account originAccount;
+	
+	@ManyToOne
 	private Account destinyAccount;
-	private Date date;
+	
+	@Enumerated(EnumType.STRING)
 	private PlanAccount type;
+	
+	private Date date;
 	private Double amount;
 	private String detail;
 	

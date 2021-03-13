@@ -2,12 +2,9 @@ package model;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -17,7 +14,7 @@ public class Account {
 	private Integer number;
 	
 	@OneToOne(cascade = CascadeType.PERSIST)
-	private User user; // Por que não LONG?
+	private User user;
 	
 	private Double balance = 0.0;
 	
