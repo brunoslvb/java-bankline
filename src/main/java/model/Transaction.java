@@ -31,6 +31,24 @@ public class Transaction {
 	private String detail;
 	
 
+	public Transaction() {}
+	
+	public Transaction(Integer id, Account originAccount, Account destinyAccount, PlanAccount type, Date date,
+			Double amount, String detail) {
+		super();
+		this.id = id;
+		this.originAccount = originAccount;
+		this.destinyAccount = destinyAccount;
+		this.type = type;
+		this.date = date;
+		this.amount = amount;
+		this.detail = detail;
+	}
+	
+	public Integer getId() {
+		return id;
+	}
+	
 	public Date getDate() {
 		return date;
 	}

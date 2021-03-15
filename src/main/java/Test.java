@@ -12,7 +12,7 @@ import model.PlanAccount;
 import model.Transaction;
 import model.User;
 import repository.AccountRepository;
-import repository.TransactionsRepository;
+import repository.TransactionRepository;
 import repository.UserRepository;
 import service.UserService;
 import utils.Validators;
@@ -108,7 +108,7 @@ public class Test {
 		}*/
 		
 		
-		TransactionsRepository transactionsRepository = new TransactionsRepository();
+		TransactionRepository transactionRepository = new TransactionRepository();
 		
 		Transaction transaction = new Transaction();
 		
@@ -118,20 +118,20 @@ public class Test {
 		transaction.setAmount(5.00);
 		transaction.setType(PlanAccount.REVENUE);
 		
-		transactionController.save(transaction);
+		// transactionController.save(transaction);
 		
 		// transactionsRepository.save(transactions);
 		
 		Transaction transactions2 = new Transaction();
 		
-		transactions2.setOriginAccount(account2);
-		transactions2.setDestinyAccount(account3);
+		transactions2.setOriginAccount(account3);
+		transactions2.setDestinyAccount(account2);
 		transactions2.setDate(new Date());
-		transactions2.setDetail("Teclado");
-		transactions2.setAmount(50.00);
+		transactions2.setDetail("Devolução parte do dinheiro");
+		transactions2.setAmount(25.00);
 		transactions2.setType(PlanAccount.TRANSFER);
 		
-		transactionController.save(transactions2);
+		// transactionController.save(transactions2);
 		
 		// transactionsRepository.save(transactions2);
 		
@@ -142,21 +142,33 @@ public class Test {
 		transactions.setDetail("Lala");
 		
 		transactionsRepository.update(transactions);
+		*/
 		
-		List<Transactions> transactionsTeste = transactionsRepository.list();
 		
-		for(Transactions transactionFor : transactionsTeste) {
-			System.out.println(transactionFor.getAccount());
+		List<Transaction> transactions = transactionController.getRevenues(account3);
+
+		System.out.println("RECEITAS");
+		
+		System.out.println(transactions.size());
+		
+		for(Transaction transactionFor : transactions) {
+			transactionController.showTransaction(transactionFor);
 		}
 		
-		transactionsRepository.delete(transactions2.getId());
+				
+		transactions = transactionController.getCharges(account3);
 		
-		transactionsTeste = transactionsRepository.list();
+		System.out.println("DESPESAS");
 		
-		for(Transactions transactionFor : transactionsTeste) {
-			System.out.println(transactionFor.getAccount().getNumber());
-		}*/
+		System.out.println(transactions.size());
 		
+		for(Transaction transactionFor : transactions) {
+			transactionFor.setAmount(transactionFor.getAmount() * -1);
+			transactionController.showTransaction(transactionFor);
+		}
+
+		System.exit(0);
+
 	}
 	
 }

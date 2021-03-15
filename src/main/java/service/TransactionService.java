@@ -1,14 +1,16 @@
 package service;
 
+import java.util.List;
+
 import model.Account;
 import model.StatusAccount;
 import model.Transaction;
 import repository.AccountRepository;
-import repository.TransactionsRepository;
+import repository.TransactionRepository;
 
 public class TransactionService {
 
-	private TransactionsRepository transactionRepository = new TransactionsRepository();
+	private TransactionRepository transactionRepository = new TransactionRepository();
 	private AccountRepository accountRepository = new AccountRepository();
 	
 	public void saveCharge(Transaction transaction) {
@@ -91,5 +93,26 @@ public class TransactionService {
 		transactionRepository.save(transaction);
 		
 	}
+	
+	/*public List<Transaction> getTransactions() {
+	
+		List<Transaction> revenues = getRevenues();
+		
+		List<Transaction> charges = getCharges();
+		
+	}*/
+	
+	public List<Transaction> getRevenues(Account account) {
+		
+		return transactionRepository.getRevenues(account);
+		
+	}
+	
+	public List<Transaction> getCharges(Account account) {
+		
+		return transactionRepository.getCharges(account);
+		
+	}
+	
 	
 }
