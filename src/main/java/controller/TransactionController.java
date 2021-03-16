@@ -44,6 +44,12 @@ public class TransactionController {
 		
 	}
 	
+	public List<Transaction> getAllTransactions(Account account) {
+		
+		return service.getAllTransactions(account);
+		
+	}
+	
 	public void showTransaction(Transaction transaction) {
 		
 		System.out.println(

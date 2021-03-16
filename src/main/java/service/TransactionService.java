@@ -114,5 +114,11 @@ public class TransactionService {
 		
 	}
 	
+	public List<Transaction> getAllTransactions(Account account) {
+		
+		return transactionRepository.getAllTransactions(account);
+		
+	}
+	
 	
 }

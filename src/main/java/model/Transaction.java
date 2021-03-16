@@ -1,5 +1,6 @@
 package model;
 
+import java.util.Comparator;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -11,7 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Transaction {
+public class Transaction implements Comparator<Transaction> {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,6 +45,7 @@ public class Transaction {
 		this.amount = amount;
 		this.detail = detail;
 	}
+	
 	
 	public Integer getId() {
 		return id;
@@ -89,6 +91,11 @@ public class Transaction {
 	}
 	public void setDestinyAccount(Account destinyAccount) {
 		this.destinyAccount = destinyAccount;
+	}
+
+	public int compare(Transaction o1, Transaction o2) {
+		
+		return o1.getDate().compareTo(o2.getDate());
 	}
 	
 	

@@ -1,11 +1,15 @@
 package repository;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+
+import com.mysql.cj.x.protobuf.MysqlxCrud.Collection;
 
 import model.Account;
 import model.PlanAccount;
@@ -14,9 +18,7 @@ import model.Transaction;
 public class TransactionRepository extends AbstractRepository<Transaction> implements Repository<Transaction> {
 
 	public List<Transaction> getRevenues(Account account){
-		
-		// String sql = String.format("SELECT e.id, e.detail, e.date, e.type, e.originAccount, e.destinyAccount, e.amount FROM %s e", entityClass.getName());
-		
+				
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Transaction> criteriaQuery = cb.createQuery(Transaction.class);
 		Root<Transaction> root = criteriaQuery.from(Transaction.class);
@@ -46,9 +48,7 @@ public class TransactionRepository extends AbstractRepository<Transaction> imple
 	}
 
 	public List<Transaction> getCharges(Account account){
-		
-		// String sql = String.format("SELECT e.id, e.detail, e.date, e.type, e.originAccount, e.destinyAccount, e.amount FROM %s e", entityClass.getName());
-		
+				
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Transaction> criteriaQuery = cb.createQuery(Transaction.class);
 		Root<Transaction> root = criteriaQuery.from(Transaction.class);
@@ -75,6 +75,20 @@ public class TransactionRepository extends AbstractRepository<Transaction> imple
 
 		return typedQuery.getResultList();
 
+	}
+	
+	public List<Transaction> getAllTransactions(Account account) {
+		
+		List<Transaction> transactions = new ArrayList<Transaction>();
+		
+		transactions.addAll(getRevenues(account));
+		
+		transactions.addAll(getCharges(account));
+		
+		Collections.sort(transactions, new Transaction());
+		
+		return transactions;
+		
 	}
 	
 }

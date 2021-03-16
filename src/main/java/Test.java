@@ -145,9 +145,9 @@ public class Test {
 		*/
 		
 		
-		List<Transaction> transactions = transactionController.getRevenues(account3);
+		List<Transaction> transactions = transactionController.getAllTransactions(account2);
 
-		System.out.println("RECEITAS");
+		System.out.println("ALL");
 		
 		System.out.println(transactions.size());
 		
@@ -156,7 +156,7 @@ public class Test {
 		}
 		
 				
-		transactions = transactionController.getCharges(account3);
+		/*transactions = transactionController.getCharges(account2);
 		
 		System.out.println("DESPESAS");
 		
@@ -165,7 +165,7 @@ public class Test {
 		for(Transaction transactionFor : transactions) {
 			transactionFor.setAmount(transactionFor.getAmount() * -1);
 			transactionController.showTransaction(transactionFor);
-		}
+		}*/
 
 		System.exit(0);
 
