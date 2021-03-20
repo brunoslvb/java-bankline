@@ -1,5 +1,6 @@
 package model;
 
+import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.Date;
 
@@ -27,14 +28,14 @@ public class Transaction implements Comparator<Transaction> {
 	@Enumerated(EnumType.STRING)
 	private PlanAccount type;
 	
-	private Date date;
+	private String date;
 	private Double amount;
 	private String detail;
 	
 
 	public Transaction() {}
 	
-	public Transaction(Integer id, Account originAccount, Account destinyAccount, PlanAccount type, Date date,
+	public Transaction(Integer id, Account originAccount, Account destinyAccount, PlanAccount type, String date,
 			Double amount, String detail) {
 		super();
 		this.id = id;
@@ -51,10 +52,10 @@ public class Transaction implements Comparator<Transaction> {
 		return id;
 	}
 	
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 	

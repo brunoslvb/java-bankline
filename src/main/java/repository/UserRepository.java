@@ -12,23 +12,9 @@ import utils.Validators;
 public class UserRepository extends AbstractRepository<User> implements Repository<User>{
 
 	public void save(User user) {
-		
-		if(Validators.isExceedMaxLength(user.getLogin(), 20)) {
-			System.out.println("Exception login excedido");
-			return;
-		}
-		
-		if(!Validators.hasMinLenght(user.getPassword(), 5)) {
-			System.out.println("Exception senha não tem o mínimo de caracteres");
-			return;
-		}
-		
-		if(!Validators.cpfIsValid(user.getCpf())) {
-			System.out.println("Exception cpf não é válido");
-			return;
-		}
-		
+				
 		Account account = new Account();
+		
 		account.setUser(user);
 		
 		AccountRepository accountRepository = new AccountRepository();
@@ -40,16 +26,6 @@ public class UserRepository extends AbstractRepository<User> implements Reposito
 	}
 	
 	public void update(User user) {
-		
-		if(Validators.isExceedMaxLength(user.getLogin(), 20)) {
-			System.out.println("Exception login excedido");
-			return;
-		}
-		
-		if(Validators.hasMinLenght(user.getPassword(), 5)) {
-			System.out.println("Exception senha não tem o mínimo de caracteres");
-			return;
-		}
 		
 		super.update(user);
 		

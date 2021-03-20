@@ -2,6 +2,9 @@ package service;
 
 import java.util.List;
 
+import exception.ExceedMaxLengthException;
+import exception.InvalidCpfException;
+import exception.MinLengthNotReachedException;
 import model.Account;
 import model.StatusAccount;
 import model.User;
@@ -17,24 +20,18 @@ public class UserService {
 	public void createUser(User user) {
 		
 		if(Validators.isExceedMaxLength(user.getLogin(), 20)) {
-			System.out.println("Exception login excedido");
-			return;
+			throw new ExceedMaxLengthException("Número de caracteres excedido no campo login");
 		}
 		
 		if(!Validators.hasMinLenght(user.getPassword(), 5)) {
-			System.out.println("Exception senha não tem o mínimo de caracteres");
-			return;
+			throw new MinLengthNotReachedException("A senha não possui a quantidade mínima de caracteres");
 		}
 		
 		if(!Validators.cpfIsValid(user.getCpf())) {
-			System.out.println("Exception cpf não é válido");
-			return;
+			throw new InvalidCpfException("CPF Inválido");
 		}
 		
-		Account account = new Account();
-		account.setUser(user);
-				
-		accountRepository.save(account);
+		userRepository.save(user);
 		
 		System.out.println("Usuário e conta criada com sucesso");
 		
@@ -43,13 +40,11 @@ public class UserService {
 	public void updateUser(User user) {
 		
 		if(Validators.isExceedMaxLength(user.getLogin(), 20)) {
-			System.out.println("Exception login excedido");
-			return;
+			throw new ExceedMaxLengthException("Número de caracteres excedido no campo login");
 		}
 		
 		if(!Validators.hasMinLenght(user.getPassword(), 5)) {
-			System.out.println("Exception senha não tem o mínimo de caracteres");
-			return;
+			throw new MinLengthNotReachedException("A senha não possui a quantidade mínima de caracteres");
 		}
 				
 		userRepository.update(user);

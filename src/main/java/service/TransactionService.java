@@ -2,11 +2,14 @@ package service;
 
 import java.util.List;
 
+import exception.DisabledAccountException;
+import exception.InsufficientAmountException;
 import model.Account;
 import model.StatusAccount;
 import model.Transaction;
 import repository.AccountRepository;
 import repository.TransactionRepository;
+import utils.Helper;
 
 public class TransactionService {
 
@@ -19,13 +22,11 @@ public class TransactionService {
 		Account account = accountRepository.findById(transaction.getOriginAccount());
 		
 		if(account.getStatus() == StatusAccount.DISABLE) {
-			System.out.println("Conta inativa");
-			return;
+			throw new DisabledAccountException("Conta desabilitada");
 		}
 		
 		if(account.getBalance() < transaction.getAmount()) {
-			System.out.println("Pobre");
-			return;
+			throw new InsufficientAmountException("Dinheiro insuficiente para realizar transação");
 		}
 		
 		Double balance = account.getBalance() - transaction.getAmount();
@@ -44,8 +45,7 @@ public class TransactionService {
 		Account account = accountRepository.findById(transaction.getOriginAccount());
 		
 		if(account.getStatus() == StatusAccount.DISABLE) {
-			System.out.println("Conta inativa");
-			return;
+			throw new DisabledAccountException("Conta desabilitada");
 		}
 		
 		Double balance = account.getBalance() + transaction.getAmount();
@@ -63,8 +63,7 @@ public class TransactionService {
 		// TRANSFERENCIA
 		
 		if(transaction.getDestinyAccount() == null) {
-			System.out.println("Conta destino não pode ser nula");
-			return;
+			throw new NullPointerException("Para esse tipo de transação, a conta destino não pode ser nula");
 		}
 		
 		Account originAccount = accountRepository.findById(transaction.getOriginAccount());
@@ -72,13 +71,11 @@ public class TransactionService {
 		Account destinyAccount = accountRepository.findById(transaction.getDestinyAccount());
 		
 		if(originAccount.getStatus() == StatusAccount.DISABLE || destinyAccount.getStatus() == StatusAccount.DISABLE) {
-			System.out.println("Uma das contas está inativa");
-			return;
+			throw new DisabledAccountException("Conta desabilitada");
 		}
 		
 		if(originAccount.getBalance() < transaction.getAmount()) {
-			System.out.println("Pobre");
-			return;
+			throw new InsufficientAmountException("Dinheiro insuficiente para realizar transação");
 		}
 		
 		Double originBalance = originAccount.getBalance() - transaction.getAmount();
@@ -94,31 +91,39 @@ public class TransactionService {
 		
 	}
 	
-	/*public List<Transaction> getTransactions() {
 	
-		List<Transaction> revenues = getRevenues();
+	public List<Transaction> getRevenues(Account account, String startDate, String endDate) {
 		
-		List<Transaction> charges = getCharges();
+		if(account == null || startDate == null) { 
+			throw new NullPointerException("Parâmetros não podem ser nulos");
+		}
 		
-	}*/
-	
-	public List<Transaction> getRevenues(Account account) {
+		endDate = Helper.checkIfEndDateIsNull(endDate);
+
+		startDate = Helper.concatStartTime(startDate);
 		
-		return transactionRepository.getRevenues(account);
+		return transactionRepository.getRevenues(account, startDate, endDate);
 		
 	}
 	
-	public List<Transaction> getCharges(Account account) {
+	public List<Transaction> getCharges(Account account, String startDate, String endDate) {
 		
-		return transactionRepository.getCharges(account);
+		endDate = Helper.checkIfEndDateIsNull(endDate);
+
+		startDate = Helper.concatStartTime(startDate);
 		
-	}
-	
-	public List<Transaction> getAllTransactions(Account account) {
-		
-		return transactionRepository.getAllTransactions(account);
+		return transactionRepository.getCharges(account, startDate, endDate);
 		
 	}
 	
-	
+	public List<Transaction> getAllTransactions(Account account, String startDate, String endDate) {
+		
+		endDate = Helper.checkIfEndDateIsNull(endDate);
+
+		startDate = Helper.concatStartTime(startDate);
+		
+		return transactionRepository.getAllTransactions(account, startDate, endDate);
+		
+	}
+
 }

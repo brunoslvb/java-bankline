@@ -1,10 +1,13 @@
 package controller;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import model.Account;
+import model.PlanAccount;
 import model.Transaction;
 import service.TransactionService;
+import utils.Helper;
 
 public class TransactionController {
 
@@ -32,21 +35,22 @@ public class TransactionController {
 		
 	}
 	
-	public List<Transaction> getRevenues(Account account) {
+	
+	public List<Transaction> getRevenues(Account account, String startDate, String endDate) {
 		
-		return service.getRevenues(account);
+		return service.getRevenues(account, startDate, endDate);
 		
 	}
 	
-	public List<Transaction> getCharges(Account account) {
+	public List<Transaction> getCharges(Account account, String startDate, String endDate) {
 		
-		return service.getCharges(account);
+		return service.getCharges(account, startDate, endDate);
 		
 	}
 	
-	public List<Transaction> getAllTransactions(Account account) {
+	public List<Transaction> getAllTransactions(Account account, String startDate, String endDate) {
 		
-		return service.getAllTransactions(account);
+		return service.getAllTransactions(account, startDate, endDate);
 		
 	}
 	
