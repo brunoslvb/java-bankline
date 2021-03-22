@@ -7,7 +7,6 @@ import model.Account;
 import model.PlanAccount;
 import model.Transaction;
 import model.User;
-import repository.TransactionRepository;
 import utils.Helper;
 
 public class Test {
@@ -20,9 +19,9 @@ public class Test {
 				
 		User userDisable = new User();
 		
-		userDisable.setName("Teste da Silva");
+		userDisable.setName("Teste 1");
 		userDisable.setCpf("22222222222");
-		userDisable.setLogin("teste");
+		userDisable.setLogin("teste1");
 		userDisable.setPassword("020202");	
 		
 		User userEnable = new User();
@@ -34,45 +33,47 @@ public class Test {
 		
 		User user = new User();
 		
-		user.setName("Bruno");
+		user.setName("Teste 3");
 		user.setCpf("44444444444");
-		user.setLogin("bruno");
+		user.setLogin("teste3");
 		user.setPassword("040404");
 		
+		// userController.save(userDisable);
+		// userController.save(userEnable);
 		// userController.save(user);
+		
+		Account accountDisable = new Account();
+		
+		accountDisable.setNumber(1);
+		accountDisable.setUser(userDisable);
+		
+		Account accountEnable = new Account();
+		
+		accountEnable.setNumber(2);
+		accountEnable.setUser(userEnable);
 		
 		Account account = new Account();
 		
-		account.setNumber(1);
-		account.setUser(userDisable);
-		
-		Account account2 = new Account();
-		
-		account2.setNumber(2);
-		account2.setUser(userEnable);
-		
-		Account account3 = new Account();
-		
-		account3.setNumber(3);
-		account3.setUser(user);
+		account.setNumber(3);
+		account.setUser(user);
 				
 		Transaction transaction = new Transaction();
 		
-		transaction.setOriginAccount(account2);
+		transaction.setOriginAccount(accountEnable);
 		transaction.setDate(Helper.getDateTime());
-		transaction.setDetail("Empréstimo para pagar o teclado");
-		transaction.setAmount(50.00);
+		transaction.setDetail("Salário");
+		transaction.setAmount(850.00);
 		transaction.setType(PlanAccount.REVENUE);
 		
 		// transactionController.save(transaction);
 				
 		Transaction transactions2 = new Transaction();
 		
-		transactions2.setOriginAccount(account2);
-		transactions2.setDestinyAccount(account3);
+		transactions2.setOriginAccount(accountEnable);
+		transactions2.setDestinyAccount(account);
 		transactions2.setDate(Helper.getDateTime());
-		transactions2.setDetail("Devolução parte do dinheiro");
-		transactions2.setAmount(33.25);
+		transactions2.setDetail("Teclado mecânico");
+		transactions2.setAmount(260.00);
 		transactions2.setType(PlanAccount.TRANSFER);
 		
 		// transactionController.save(transactions2);
@@ -81,7 +82,7 @@ public class Test {
 		
 		String endDate = LocalDate.of(2021, 03, 15).toString();
 		
-		List<Transaction> transactions = transactionController.getAllTransactions(account2, startDate, endDate);
+		List<Transaction> transactions = transactionController.getAllTransactions(accountEnable, startDate, null);
 
 		System.out.println("ALL");
 		
